@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Booking System</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .login-box, .home-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h1, .home-box h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .textbox {
+            margin-bottom: 20px;
+        }
+
+        .textbox input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #0072ff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #005bb5;
+        }
+
+        .message {
+            margin-top: 20px;
+            color: #666;
+        }
+
+        .message a {
+            color: #0072ff;
+            text-decoration: none;
+        }
+
+        .message a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="container">
+        <div class="login-box">
+            <h1>Login</h1>
+            <form id="loginForm">
+                <div class="textbox">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="textbox">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p class="message">Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <div id="homePage" class="container" style="display: none;">
+        <div class="home-box">
+            <h1>Welcome to Sports Booking System</h1>
+            <p>Manage your tournaments and bookings efficiently.</p>
+            <button class="btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginPage = document.getElementById('loginPage');
+            const homePage = document.getElementById('homePage');
+
+            // Function to show the home page and hide the login page
+            function showHomePage() {
+                loginPage.style.display = 'none';
+                homePage.style.display = 'flex';
+            }
+
+            // Function to show the login page and hide the home page
+            function showLoginPage() {
+                loginPage.style.display = 'flex';
+                homePage.style.display = 'none';
+            }
+
+            // Handle form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get the values from the form
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                // Simple validation (you can expand this as needed)
+                if (username === '' || password === '') {
+                    alert('Please fill in both fields');
+                    return;
+                }
+
+                // Simulate form submission
+                alert('Login successful!');
+                
+                // Show home page
+                showHomePage();
+            });
+
+            // Simulate a user being logged in for demo purposes
+            // In a real app, you'd check authentication status here
+            showLoginPage(); // Start by showing the login page
+
+            // Function to handle logout
+            window.logout = function() {
+                // Show login page on logout
+                showLoginPage();
+            };
+        });
+    </script>
+</body>
+</html>

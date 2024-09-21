@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="/CSS/style_sheet/inventory.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="loginPage">
+        <div class="image-overlay">
+            <h1>WELCOME</h1>
+            <div class="login-form">
+                <form id="loginForm">
+                    <input type="email" id="email" placeholder="email@domain.com" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                    <button type="submit" class="login-btn">LOGIN</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div class="dashboard-container" id="dashboardPage">
+        <div class="dashboard-header">
+            <h1>INVENTORY STATUS</h1>
+            <p>Check the stock level!</p>
+        </div>
+        <div class="dashboard-grid">
+            <div class="dashboard-item" id="departmentItem">
+                <img src="icons/department.png" alt="Department">
+                <h3>Department</h3>
+            </div>
+            <div class="dashboard-item">
+                <img src="icons/price.png" alt="Price">
+                <h3>Price</h3>
+            </div>
+            <div class="dashboard-item">
+                <img src="icons/order.png" alt="Order">
+                <h3>Order</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- Department Selection Page -->
+    <div class="department-container" id="departmentPage">
+        <h1>Select a Department</h1>
+        <div class="department-form">
+            <select id="departmentDropdown">
+                <option value="department">Select department </option>
+                    <option value="Power">B.E. in Power Engineering </option>
+                    <option value="Mechanical">B.E. Mechanical Engineering</option>
+                    <option value="Surveying and Geo-Informatics">B.E. in Surveying and Geo-Informatics</option>
+                    <option value="Civil">Diploma in Civil Engineering</option>
+                    <option value="Construction and Supervision">Diplomain Construction and Supervision</option>
+                    <option value="Computer System and Network">Diploma in Computer System and Network</option>
+                    <option value="Electrical">Diplomain Electrical Engineering</option>
+                    <option value="Mechanical">Diploma in Mechanical Engineering</option>
+                    <option value="Electronics and Communication">Diploma in Electronics and Communication</option>
+                    <option value="Materials and Procurement">Diploma in Materialsand Procurement Management</option>
+                    <option value="Surveying">Diplomain Surveying</option>
+                    <option value="Multimedia and Animation">Diploma in Multimedia and Animation</option>
+                
+            </select>
+            <button class="department-login-btn" id="goToLoginBtn">Go to Department Login</button>
+        </div>
+    </div>
+
+    <!-- Department Login Page -->
+    <div class="department-login-container" id="departmentLoginPage">
+        <h1>DEPARTMENT LOGIN</h1>
+        <p>Please enter your department code</p>
+        <div class="department-login-form">
+            <form id="departmentLoginForm">
+                <input type="text" id="departmentCode" placeholder="Enter Department Code" required>
+                <button type="submit" class="login-btn">LOGIN</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Page -->
+    <div class="admin-dashboard-container" id="adminDashboardPage">
+        <h1>Inventory</h1>
+        <button class="admin-dashboard-btn" id="addItemBtn">Add Item</button>
+        <button class="admin-dashboard-btn" id="deleteItemBtn">Delete Item</button>
+        <button class="admin-dashboard-btn" id="viewInventoryBtn">View Inventory</button>
+        <button class="admin-dashboard-btn" id="monthlyReportBtn">Report</button>
+        <button class="admin-dashboard-btn" id="viewOrdersBtn">View Orders</button>
+    </div>
+
+    <script>
+        // Login form submission
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            if (email && password) {
+                // Simulate login
+                document.getElementById("loginPage").style.display = "none";
+                document.getElementById("dashboardPage").style.display = "block";
+            } else {
+                alert("Please fill in all fields");
+            }
+        });
+
+        // Show department selection page when Department is clicked
+        document.getElementById("departmentItem").addEventListener("click", function() {
+            document.getElementById("dashboardPage").style.display = "none";
+            document.getElementById("departmentPage").style.display = "block";
+        });
+
+        // Handle department selection and go to department login page
+        document.getElementById("goToLoginBtn").addEventListener("click", function() {
+            const selectedDepartment = document.getElementById("departmentDropdown").value;
+
+            if (selectedDepartment) {
+                document.getElementById("departmentPage").style.display = "none";
+                document.getElementById("departmentLoginPage").style.display = "block";
+            } else {
+                alert("Please select a department");
+            }
+        });
+
+        // Handle department login form submission
+        document.getElementById("departmentLoginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const departmentCode = document.getElementById("departmentCode").value;
+
+            if (departmentCode) {
+                document.getElementById("departmentLoginPage").style.display = "none";
+                document.getElementById("adminDashboardPage").style.display = "block";
+            } else {
+                alert("Please enter the department code");
+            }
+        });
+    </script>
+</body>
+</html>

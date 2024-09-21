@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Inventory Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+        }
+
+        header {
+            background-color: #1c1c1c;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            padding: 2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 60px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .section {
+            background: #1f1f1f;
+            padding: 2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .section h2 {
+            margin-bottom: 1em;
+            font-size: 2em;
+            color: #00c6ff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5em;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #ddd;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75em;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+        }
+
+        .form-group input:focus {
+            border: 2px solid #00c6ff;
+            outline: none;
+        }
+
+        button {
+            background-color: #00c6ff;
+            border: none;
+            color: #fff;
+            padding: 0.75em 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #0072ff;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .message {
+            margin-top: 1em;
+            padding: 1em;
+            background-color: #444;
+            border-radius: 5px;
+        }
+
+        .message.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Department Inventory Management System</h1>
+        <nav>
+            <a href="#login" id="loginLink">Login</a>
+            <a href="#register" id="registerLink">Register</a>
+            <a href="#dashboard" class="hidden" id="dashboardLink">Dashboard</a>
+        </nav>
+    </header>
+
+    <section id="login" class="container">
+        <div class="section">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="departmentID">Department ID:</label>
+                    <input type="text" id="departmentID" name="departmentID" required>
+                </div>
+                <div class="form-group">
+                    <label for="userID">User ID:</label>
+                    <input type="text" id="userID" name="userID" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <div id="loginError" class="message hidden">Invalid Department ID or User ID</div>
+        </div>
+    </section>
+
+    <section id="register" class="container hidden">
+        <div class="section">
+            <h2>Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="newDepartmentID">Department ID:</label>
+                    <input type="text" id="newDepartmentID" name="newDepartmentID" required>
+                </div>
+                <div class="form-group">
+                    <label for="newUserID">User ID:</label>
+                    <input type="text" id="newUserID" name="newUserID" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">Password:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <button type="submit">Register</button>
+            </form>
+            <div id="registerError" class="message hidden">Registration failed. Please try again.</div>
+        </div>
+    </section>
+
+    <section id="dashboard" class="container hidden">
+        <div class="section">
+            <h2>Dashboard</h2>
+            <button id="logoutButton">Logout</button>
+            <!-- Admin Section -->
+            <div id="adminSection" class="hidden">
+                <h3>Admin Dashboard</h3>
+                <button id="manageInventoryButton">Manage Inventory</button>
+                <button id="generateReportButton">Generate Report</button>
+                <button id="viewOrdersButton">View Orders</button>
+            </div>
+
+            <!-- User Section -->
+            <div id="userSection" class="hidden">
+                <h3>User Dashboard</h3>
+                <button id="viewInventoryButton">View Inventory</button>
+                <button id="placeOrderButton">Place Order</button>
+            </div>
+
+            <!-- Manage Inventory Section -->
+            <div id="manageInventorySection" class="hidden">
+                <h3>Manage Inventory</h3>
+                <button id="addItemButton">Add Item</button>
+                <button id="deleteItemButton">Delete Item</button>
+                <button id="viewExistingInventoryButton">View Existing Inventory</button>
+            </div>
+
+            <!-- Add Item Section -->
+            <div id="addItemSection" class="hidden">
+                <h3>Add Item</h3>
+                <form id="addItemForm">
+                    <div class="form-group">
+                        <label for="itemName">Item Name:</label>
+                        <input type="text" id="itemName" name="itemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemQuantity">Quantity:</label>
+                        <input type="number" id="itemQuantity" name="itemQuantity" required>
+                    </div>
+                    <button type="submit">Add Item</button>
+                </form>
+            </div>
+
+            <!-- Delete Item Section -->
+            <div id="deleteItemSection" class="hidden">
+                <h3>Delete Item</h3>
+                <form id="deleteItemForm">
+                    <div class="form-group">
+                        <label for="itemID">Item ID:</label>
+                        <input type="text" id="itemID" name="itemID" required>
+                    </div>
+                    <button type="submit">Delete Item</button>
+                </form>
+            </div>
+
+            <!-- View Existing Inventory Section -->
+            <div id="viewExistingInventorySection" class="hidden">
+                <h3>Existing Inventory</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryList"></tbody>
+                </table>
+            </div>
+
+            <!-- Place Order Section -->
+            <div id="placeOrderSection" class="hidden">
+                <h3>Place Order</h3>
+                <form id="placeOrderForm">
+                    <div class="form-group">
+                        <label for="orderItemName">Item Name:</label>
+                        <input type="text" id="orderItemName" name="orderItemName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderQuantity">Quantity:</label>
+                        <input type="number" id="orderQuantity" name="orderQuantity" required>
+                    </div>
+                    <button type="submit">Place Order</button>
+                </form>
+            </div>
+
+            <!-- Generate Report Section -->
+            <div id="generateReportSection" class="hidden">
+                <h3>Generate Report</h3>
+                <form id="generateReportForm">
+                    <div class="form-group">
+                        <label for="reportType">Report Type:</label>
+                        <select id="reportType" name="reportType">
+                            <option value="monthly">Monthly Usage</option>
+                            <option value="yearly">Yearly Usage</option>
+                        </select>
+                    </div>
+                    <button type="submit">Generate Report</button>
+                </form>
+                <div id="reportOutput" class="message hidden"></div>
+            </div>
+
+            <!-- View Orders Section -->
+            <div id="viewOrdersSection" class="hidden">
+                <h3>View Orders</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Department</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersList"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            const dashboard = document.getElementById('dashboard');
+            const adminSection = document.getElementById('adminSection');
+            const userSection = document.getElementById('userSection');
+            const message = document.getElementById('message');
+
+            const registerForm = document.getElementById('registerForm');
+            const registerError = document.getElementById('registerError');
+            const registerLink = document.getElementById('registerLink');
+            const loginLink = document.getElementById('loginLink');
+            const dashboardLink = document.getElementById('dashboardLink');
+
+            // Toggle between sections
+            const sections = {
+                login: document.getElementById('login'),
+                register: document.getElementById('register'),
+                dashboard: document.getElementById('dashboard'),
+                manageInventorySection: document.getElementById('manageInventorySection'),
+                addItemSection: document.getElementById('addItemSection'),
+                deleteItemSection: document.getElementById('deleteItemSection'),
+                viewExistingInventorySection: document.getElementById('viewExistingInventorySection'),
+                placeOrderSection: document.getElementById('placeOrderSection'),
+                generateReportSection: document.getElementById('generateReportSection'),
+                viewOrdersSection: document.getElementById('viewOrdersSection'),
+            };
+
+            function toggleSection(section) {
+                for (let key in sections) {
+                    sections[key].classList.add('hidden');
+                }
+                sections[section].classList.remove('hidden');
+            }
+
+            registerLink.addEventListener('click', () => {
+                toggleSection('register');
+            });
+
+            loginLink.addEventListener('click', () => {
+                toggleSection('login');
+            });
+
+            // Handle Login
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const departmentID = document.getElementById('departmentID').value;
+                const userID = document.getElementById('userID').value;
+
+                // Authentication logic (Replace with actual authentication)
+                if (departmentID === 'admin' && userID === 'admin123') {
+                    toggleSection('dashboard');
+                    adminSection.classList.remove('hidden');
+                    dashboardLink.classList.remove('hidden');
+                    loginLink.classList.add('hidden');
+                    registerLink.classList.add('hidden');
+                } else if (departmentID && userID) {
+                    toggleSection('dashboard');
+                    userSection.classList.remove('hidden');
+                    dashboardLink.classList.remove('hidden');
+                    loginLink.classList.add('hidden');
+                    registerLink.classList.add('hidden');
+                } else {
+                    loginError.classList.remove('hidden');
+                }
+            });
+
+            // Handle Registration
+            registerForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                const newDepartmentID = document.getElementById('newDepartmentID').value;
+                const newUserID = document.getElementById('newUserID').value;
+                const newPassword = document.getElementById('newPassword').value;
+
+                // Registration logic (Replace with actual registration)
+                if (newDepartmentID && newUserID && newPassword) {
+                    toggleSection('login');
+                    message.textContent = 'Registration successful. Please log in.';
+                    message.classList.remove('hidden');
+                } else {
+                    registerError.classList.remove('hidden');
+                }
+            });
+
+            // Admin actions
+            document.getElementById('manageInventoryButton').addEventListener('click', () => {
+                toggleSection('manageInventorySection');
+            });
+
+            document.getElementById('generateReportButton').addEventListener('click', () => {
+                toggleSection('generateReportSection');
+            });
+
+            document.getElementById('viewOrdersButton').addEventListener('click', () => {
+                toggleSection('viewOrdersSection');
+            });
+
+            // User actions
+            document.getElementById('viewInventoryButton').addEventListener('click', () => {
+                toggleSection('viewExistingInventorySection');
+            });
+
+            document.getElementById('placeOrderButton').addEventListener('click', () => {
+                toggleSection('placeOrderSection');
+            });
+
+            // Logout
+            document.getElementById('logoutButton').addEventListener('click', () => {
+                toggleSection('login');
+                adminSection.classList.add('hidden');
+                userSection.classList.add('hidden');
+                message.classList.add('hidden');
+                dashboardLink.classList.add('hidden');
+                loginLink.classList.remove('hidden');
+                registerLink.classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+
+</html>

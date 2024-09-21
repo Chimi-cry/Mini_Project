@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* Common Styles */
+.container {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Login Page Styles */
+.login-container {
+    background-image: url('Picture/JNEC.jpg'); /* Replace with your warehouse image */
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.image-overlay {
+    background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    width: 80%;
+    max-width: 400px;
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+}
+
+.login-btn {
+    background-color: #3c3434;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.login-btn:hover {
+    background-color: #555;
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    margin: 10px 0;
+    color: #ddd;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+    display: none;
+    padding: 20px;
+}
+
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    text-align: center;
+}
+
+.dashboard-item {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.dashboard-item img {
+    width: 60px;
+    height: 60px;
+}
+
+.dashboard-item h3 {
+    margin-top: 10px;
+}
+
+.dashboard-item:hover {
+    background-color: #ddd;
+}
+
+/* Department Styles */
+.department-container {
+    display: none;
+    padding: 20px;
+}
+
+.department-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.department-login-btn {
+    background-color: #333;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.department-login-btn:hover {
+    background-color: #555;
+}
+
+/* Department Login Styles */
+.department-login-container {
+    display: none;
+}
+
+.department-login-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+/* Admin Dashboard Styles */
+.admin-dashboard-container {
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.admin-dashboard-btn {
+    background-color: #333;
+    color: rgb(189, 186, 186);
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.admin-dashboard-btn:hover {
+    background-color: #555;
+}
